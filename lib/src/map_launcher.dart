@@ -12,9 +12,16 @@ class MapLauncher {
   /// Returns list of installed map apps on the device.
   static Future<List<AvailableMap>> get installedMaps async {
     final maps = await _channel.invokeMethod('getInstalledMaps');
-    return List<AvailableMap>.from(
+
+    // Create a list of available maps from the JSON data
+    final List<AvailableMap> availableMaps = List<AvailableMap>.from(
       maps.map((map) => AvailableMap.fromJson(map)),
     );
+
+    // Add your custom WattspotMap to the available maps list at the beginning.
+    availableMaps.insert(0, WattspotMap());
+
+    return availableMaps;
   }
 
   /// Opens map app specified in [mapType]
@@ -99,4 +106,13 @@ class MapLauncher {
       {'mapType': Utils.enumToString(mapType)},
     );
   }
+}
+
+class WattspotMap extends AvailableMap {
+  WattspotMap()
+      : super(
+          mapName: 'Wattspot',
+          mapType: MapType.wattspot,
+          icon: 'packages/map_launcher/assets/icons/wattspot.svg',
+        );
 }

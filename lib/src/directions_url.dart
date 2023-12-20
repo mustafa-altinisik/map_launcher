@@ -350,5 +350,23 @@ String getMapDirectionsUrl({
           ...(extraParams ?? {}),
         },
       );
+
+    case MapType.wattspot:
+      return Utils.buildUrl(
+        url: 'wattspot://route',
+        queryParams: {
+          'startname': originTitle,
+          'startx': origin?.longitude.toString(),
+          'starty': origin?.latitude.toString(),
+          'goalname': destinationTitle,
+          'goaly': '${destination.latitude}',
+          'goalx': '${destination.longitude}',
+          'carType': '1',
+          ...(extraParams ?? {}),
+        },
+      );
+
+    default:
+      return '';
   }
 }

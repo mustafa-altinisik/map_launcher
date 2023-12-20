@@ -83,6 +83,9 @@ enum MapType {
 
   // TMAP
   tmap,
+
+  //Wattspot
+  wattspot,
 }
 
 /// Defines the supported modes of transportation for [showDirections]

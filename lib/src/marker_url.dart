@@ -326,5 +326,8 @@ String getMapMarkerUrl({
           ...(extraParams ?? {}),
         },
       );
+
+    default:
+      return '';
   }
 }
